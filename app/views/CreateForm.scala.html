@@ -1,0 +1,15 @@
+@(form:Form[_])
+
+@crudmain("create person form"){
+<form action="#" method="POST">
+  @{
+  val fields = form.mapping.mappings.collect { case FieldMapping(fieldName,_) => fieldName }
+  
+  for (fieldName <- fields) yield {
+	  helper.inputText(form(fieldName))
+  }
+  }
+  
+  <input type="submit" value="create">
+</form>
+}
