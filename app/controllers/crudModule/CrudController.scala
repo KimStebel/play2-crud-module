@@ -42,7 +42,7 @@ object PersonFormHandler extends FormHandler[Person] {
   def parseCreate(request:Request[_]):Person = parseUpdate(request)
   
   def show(p:Person):Html = Html(p.toString)
-  def showAll(l:List[Person]):Html = l.map(show).reduce(_+_)
+  def showAll(l:List[Person]):Html = l.map(show).foldLeft(Html(""))((start, x) => start + x)
 }
 
 abstract class CrudController[A](implicit dbm:DbManager[A], fh:FormHandler[A]) extends Controller {
